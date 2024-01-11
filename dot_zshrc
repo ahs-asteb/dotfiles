@@ -3,7 +3,6 @@ alias gti=git
 alias grit='git --no-pager'
 
 export EDITOR="nvim"
-export PAGER="bat"
 
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
