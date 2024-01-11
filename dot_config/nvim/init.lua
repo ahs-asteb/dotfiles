@@ -1,0 +1,156 @@
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+--  --  --
+
+vim.g.lt_height = 10
+vim.g.mapleader = ","
+vim.g.maplocalleader = "\\"
+vim.g.netrw_bufsettings = "noma nomod nu nobl nowrap ro"
+vim.g.nocompatible = 1
+vim.g.termguicolors = false
+
+vim.opt.autoread = true
+vim.opt.cmdheight = 2
+vim.opt.colorcolumn = "80"
+vim.opt.cursorline = true
+vim.opt.expandtab = true
+vim.opt.expandtab = true
+vim.opt.ignorecase = true
+vim.opt.number = true
+vim.opt.scrolloff = 8
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.tabstop = 2
+
+--  --  --
+
+require("lazy").setup({
+  -- colorscheme (none currently)
+  {
+    "nordtheme/vim",
+    cond = not vim.g.vscode,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.g.nord_cursor_line_number_background = true
+      vim.g.nord_uniform_diff_background = true
+      vim.g.nord_italic = true
+      vim.g.nord_italic_comments = true
+      vim.cmd([[colorscheme nord]])
+    end,
+  },
+  -- others
+  {
+    "github/copilot.vim",
+    cond = not vim.g.vscode,
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    cond = not vim.g.vscode,
+    tag = "0.1.5",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      local actions = require("telescope.actions")
+      require("telescope").setup({
+        defaults = {
+          mappings = {
+            i = {
+              ["<esc>"] = require("telescope.actions").close,
+              ["<C-j>"] = {
+                actions.move_selection_next,
+                type = "action",
+                opts = { nowait = true, silent = true },
+              },
+              ["<C-k>"] = {
+                actions.move_selection_previous,
+                type = "action",
+                opts = { nowait = true, silent = true },
+              },
+            },
+          },
+        },
+      })
+    end,
+  },
+  "junegunn/vim-easy-align",
+  "tpope/vim-commentary",
+  {
+    "tpope/vim-fugitive",
+    cond = not vim.g.vscode,
+  },
+  "tpope/vim-repeat",
+  "tpope/vim-surround",
+  "wellle/targets.vim",
+  {
+    "nvim-treesitter/nvim-treesitter",
+    cond = not vim.g.vscode,
+    cmd = "TSUpdate",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = {
+          "javascript",
+          "lua",
+          "python",
+          "swift",
+          "tsx",
+          "typescript",
+          "vim",
+          "yaml",
+        },
+        highlight = {
+          enable = true,
+        },
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              ['af'] = '@function.outer',
+              ['if'] = '@function.inner',
+              ['ac'] = '@class.outer',
+              ['ic'] = '@class.inner',
+            },
+          },
+        },
+      })
+    end,
+  },
+  -- keybindings
+  {
+    "lionc/nest.nvim",
+    cond = not vim.g.vscode,
+    config = function()
+      require("nest").applyKeymaps({
+        { "-", "<cmd>Explore <CR>" },
+        { "<C-t>", "<cmd>tabnew <CR>" },
+        { "j", "gj" },
+        { "k", "gk" },
+        {
+          "<leader>",
+          { "f", {
+            { "f", "<cmd>Telescope find_files<CR>" },
+            { "g", "<cmd>Telescope live_grep<CR>" },
+            { "b", "<cmd>Telescope buffers<CR>" },
+            { "h", "<cmd>Telescope help_tags<CR>" },
+            { ":", "<cmd>Telescope commands<CR>" },
+            { "y", "<cmd>Telescope command_history<CR>" },
+            },
+          },
+        },
+      })
+    end,
+  },
+})

@@ -1,0 +1,50 @@
+[color]
+  ui = auto
+
+[user]
+  name = Andrew Stebenné
+  email = andrew.stebenne@atlantichealth.org
+
+[core]
+  editor = nvim
+  pager = delta --dark
+
+[interactive]
+  diffFilter = delta --color-only
+  singleKey = true
+
+[delta]
+  features = side-by-side line-numbers decorations
+  whitespace-error-style = 22 reverse
+  syntax-theme = Nord
+
+[help]
+  autocorrect = 30
+
+[format]
+  pretty = oneline
+  abbrev = 7
+
+[push]
+  default = simple
+  autoSetupRemote = true
+
+[alias]
+  a = add
+  b = branch
+  d = diff
+  f = fetch --all
+  g = log --graph -20
+  s = status
+  co = checkout
+  dc = diff --cached
+
+[cherry]
+  abbrev = 7
+
+[pull]
+  rebase = false
+
+[credential "https://github.com"]
+  helper =
+  helper = !gh auth git-credential
