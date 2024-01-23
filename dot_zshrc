@@ -30,4 +30,16 @@ function colours-to() {
 }
 alias italics='echo -e "\e[3mItalics?\e[23m"'
 
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+
+# bun completions
+[ -s "/Users/andrew.stebenne/.bun/_bun" ] && source "/Users/andrew.stebenne/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+export FZF_DEFAULT_COMMAND="rg --hidden --follow --glob '!.git/*'"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
