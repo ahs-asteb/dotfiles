@@ -61,7 +61,10 @@ require("lazy").setup({
     "nvim-telescope/telescope.nvim",
     cond = not vim.g.vscode,
     tag = "0.1.5",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
+    },
     config = function()
       local actions = require("telescope.actions")
       require("telescope").setup({
@@ -82,17 +85,69 @@ require("lazy").setup({
             },
           },
         },
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+          },
+        },
       })
+      require("telescope").load_extension("fzf")
     end,
   },
   "junegunn/vim-easy-align",
+  {
+    "lewis6991/gitsigns.nvim",
+    cond = not vim.g.vscode,
+    config = function(gs)
+      local gs = require('gitsigns')
+      gs.setup({
+        on_attach = function(bufnr)
+          require('nest').applyKeymaps({
+            { buffer = bufnr,
+              { mode = "ox",
+                { "ih", ":<C-U>Gitsigns select_hunk<CR>" },
+                { "ah", ":<C-U>Gitsigns select_hunk<CR>" },
+              },
+              { options = { expr = true },
+                { "[c",
+                  function()
+                    if vim.wo.diff then return '[c' end
+                    vim.schedule(function() gs.prev_hunk() end)
+                    return '<Ignore>'
+                  end
+                },
+                { "]c",
+                  function()
+                    if vim.wo.diff then return ']c' end
+                    vim.schedule(function() gs.next_hunk() end)
+                    return '<Ignore>'
+                  end
+                },
+              },
+              { "<leader>",
+                { "hs", gs.stage_hunk },
+                { "hr", gs.reset_hunk },
+                { "hu", gs.undo_stage_hunk },
+              },
+            }
+          })
+        end
+      })
+    end,
+  },
+  "tpope/vim-abolish",
   "tpope/vim-commentary",
+  "tpope/vim-endwise",
   {
     "tpope/vim-fugitive",
     cond = not vim.g.vscode,
   },
   "tpope/vim-repeat",
   "tpope/vim-surround",
+  "tpope/vim-tbone",
   "wellle/targets.vim",
   {
     "nvim-treesitter/nvim-treesitter",
