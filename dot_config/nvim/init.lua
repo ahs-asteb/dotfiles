@@ -84,6 +84,10 @@ require("lazy").setup({
               },
             },
           },
+          file_ignore_patterns = {
+            "node_modules",
+            "*.pyz",
+          },
         },
         extensions = {
           fzf = {
@@ -160,10 +164,12 @@ require("lazy").setup({
           "lua",
           "python",
           "swift",
-          "tsx",
           "typescript",
           "vim",
           "yaml",
+        },
+        indent = {
+          enable = true,
         },
         highlight = {
           enable = true,
