@@ -57,6 +57,48 @@ require("lazy").setup({
     "github/copilot.vim",
     cond = not vim.g.vscode,
   },
+  "junegunn/vim-easy-align",
+  {
+    "lewis6991/gitsigns.nvim",
+    cond = not vim.g.vscode,
+    config = function(gs)
+      local gs = require('gitsigns')
+      gs.setup({
+        on_attach = function(bufnr)
+          require('nest').applyKeymaps({
+            { buffer = bufnr,
+              { mode = "ox",
+                { "ih", ":<C-U>Gitsigns select_hunk<CR>" },
+                { "ah", ":<C-U>Gitsigns select_hunk<CR>" },
+              },
+              { options = { expr = true },
+                { "[c",
+                  function()
+                    if vim.wo.diff then return '[c' end
+                    vim.schedule(function() gs.prev_hunk() end)
+                    return '<Ignore>'
+                  end
+                },
+                { "]c",
+                  function()
+                    if vim.wo.diff then return ']c' end
+                    vim.schedule(function() gs.next_hunk() end)
+                    return '<Ignore>'
+                  end
+                },
+              },
+              { "<leader>",
+                { "hs", gs.stage_hunk },
+                { "hr", gs.reset_hunk },
+                { "hu", gs.undo_stage_hunk },
+              },
+            }
+          })
+        end
+      })
+    end,
+  },
+  "maxmellon/vim-jsx-pretty",
   {
     "nvim-telescope/telescope.nvim",
     cond = not vim.g.vscode,
@@ -101,48 +143,6 @@ require("lazy").setup({
       require("telescope").load_extension("fzf")
     end,
   },
-  "junegunn/vim-easy-align",
-  {
-    "lewis6991/gitsigns.nvim",
-    cond = not vim.g.vscode,
-    config = function(gs)
-      local gs = require('gitsigns')
-      gs.setup({
-        on_attach = function(bufnr)
-          require('nest').applyKeymaps({
-            { buffer = bufnr,
-              { mode = "ox",
-                { "ih", ":<C-U>Gitsigns select_hunk<CR>" },
-                { "ah", ":<C-U>Gitsigns select_hunk<CR>" },
-              },
-              { options = { expr = true },
-                { "[c",
-                  function()
-                    if vim.wo.diff then return '[c' end
-                    vim.schedule(function() gs.prev_hunk() end)
-                    return '<Ignore>'
-                  end
-                },
-                { "]c",
-                  function()
-                    if vim.wo.diff then return ']c' end
-                    vim.schedule(function() gs.next_hunk() end)
-                    return '<Ignore>'
-                  end
-                },
-              },
-              { "<leader>",
-                { "hs", gs.stage_hunk },
-                { "hr", gs.reset_hunk },
-                { "hu", gs.undo_stage_hunk },
-              },
-            }
-          })
-        end
-      })
-    end,
-  },
-  "maxmellon/vim-jsx-pretty",
   "tpope/vim-abolish",
   "tpope/vim-commentary",
   "tpope/vim-endwise",
