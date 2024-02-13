@@ -142,6 +142,7 @@ require("lazy").setup({
       })
     end,
   },
+  "maxmellon/vim-jsx-pretty",
   "tpope/vim-abolish",
   "tpope/vim-commentary",
   "tpope/vim-endwise",
@@ -170,9 +171,11 @@ require("lazy").setup({
         },
         indent = {
           enable = true,
+          disable = { "jsx", "tsx" },
         },
         highlight = {
           enable = true,
+          disable = { "jsx", "tsx" },
         },
         textobjects = {
           select = {
