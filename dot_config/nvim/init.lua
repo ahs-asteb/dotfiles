@@ -149,6 +149,9 @@ require("lazy").setup({
   {
     "tpope/vim-fugitive",
     cond = not vim.g.vscode,
+    dependencies = {
+      "tpope/vim-rhubarb"
+    },
   },
   "tpope/vim-repeat",
   "tpope/vim-surround",
