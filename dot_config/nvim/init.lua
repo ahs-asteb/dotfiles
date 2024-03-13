@@ -208,7 +208,8 @@ require("lazy").setup({
         {
           "<leader>",
           { "f", {
-            { "f", "<cmd>Telescope find_files<CR>" },
+            { "f", "<cmd>Telescope git_files<CR>" },
+            { "F", "<cmd>Telescope find_files<CR>" },
             { "g", "<cmd>Telescope live_grep<CR>" },
             { "b", "<cmd>Telescope buffers<CR>" },
             { "h", "<cmd>Telescope help_tags<CR>" },
