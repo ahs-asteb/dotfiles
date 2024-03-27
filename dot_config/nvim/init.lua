@@ -105,6 +105,7 @@ require("lazy").setup({
     tag = "0.1.5",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "fannheyward/telescope-coc.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
     },
     config = function()
@@ -128,7 +129,7 @@ require("lazy").setup({
           },
           file_ignore_patterns = {
             "node_modules",
-            "*.pyz",
+            "*pyz",
           },
         },
         extensions = {
@@ -138,9 +139,14 @@ require("lazy").setup({
             override_file_sorter = true,
             case_mode = "smart_case",
           },
+          coc = {
+            theme = "dropdown",
+            prefer_locations = true,
+          },
         },
       })
       require("telescope").load_extension("fzf")
+      require("telescope").load_extension("coc")
     end,
   },
   "tpope/vim-abolish",
@@ -195,6 +201,17 @@ require("lazy").setup({
       })
     end,
   },
+  -- coc.nvim
+  {
+    "neoclide/coc.nvim",
+    branch = "release",
+    --   { "neoclide/coc-tsserver", build = "yarn install --frozen-lockfile" },
+    --   { "neoclide/coc-html", build = "yarn install --frozen-lockfile" },
+    --   { "neoclide/coc-json", build = "yarn install --frozen-lockfile" },
+    --   { "neoclide/coc-prettier", build = "yarn install --frozen-lockfile" },
+    --   { "neoclide/coc-eslint", build = "yarn install --frozen-lockfile" },
+    --   { "josa42/coc-lua", build = "yarn install --frozen-lockfile" },
+  },
   -- keybindings
   {
     "lionc/nest.nvim",
@@ -205,17 +222,36 @@ require("lazy").setup({
         { "<C-t>", "<cmd>tabnew <CR>" },
         { "j", "gj" },
         { "k", "gk" },
-        {
-          "<leader>",
-          { "f", {
-            { "f", "<cmd>Telescope git_files<CR>" },
-            { "F", "<cmd>Telescope find_files<CR>" },
-            { "g", "<cmd>Telescope live_grep<CR>" },
-            { "b", "<cmd>Telescope buffers<CR>" },
-            { "h", "<cmd>Telescope help_tags<CR>" },
-            { ":", "<cmd>Telescope commands<CR>" },
-            { "y", "<cmd>Telescope command_history<CR>" },
+        { "<leader>",
+          { "f",
+            {
+              { "f", "<cmd>Telescope git_files<CR>" },
+              { "F", "<cmd>Telescope find_files<CR>" },
+              { "g", "<cmd>Telescope live_grep<CR>" },
+              { "b", "<cmd>Telescope buffers<CR>" },
+              { "h", "<cmd>Telescope help_tags<CR>" },
+              { ":", "<cmd>Telescope commands<CR>" },
+              { "y", "<cmd>Telescope command_history<CR>" },
             },
+          },
+          { "c",
+            {
+              { "c", "<cmd>Telescope coc commands" },
+              { "r", "<cmd>Telescope coc references<CR>" },
+              { "a", "<cmd>Telescope coc code_actions<CR>" },
+              { "d", "<cmd>Telescope coc diagnostics<CR>" },
+              { "s", "<cmd>Telescope coc symbols<CR>" },
+              { "S", "<cmd>Telescope coc workspace_symbols<CR>" },
+              { "t", "<cmd>Telescope coc type_definitions<CR>" },
+              { "i", "<cmd>Telescope coc implementations<CR>" },
+              { "p", "<cmd>Telescope coc list<CR>" },
+            }
+          },
+          { "m", "<cmd>CocCommand prettier.formatFile<CR>" },
+        },
+        { mode = "v",
+          {
+            "m", "<Plug>(coc-format-selected)"
           },
         },
       })
