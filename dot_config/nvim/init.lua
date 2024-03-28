@@ -234,6 +234,11 @@ require("lazy").setup({
               { "y", "<cmd>Telescope command_history<CR>" },
             },
           },
+          {
+            "g",
+            { "d", "<Plug>(coc-definition)" },
+            { "i", "<Plug>(coc-implementation)" },
+          },
           { "c",
             {
               { "c", "<cmd>Telescope coc commands" },
