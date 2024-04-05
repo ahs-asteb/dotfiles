@@ -218,47 +218,41 @@ require("lazy").setup({
     cond = not vim.g.vscode,
     config = function()
       require("nest").applyKeymaps({
-        { "-", "<cmd>Explore <CR>" },
-        { "<C-t>", "<cmd>tabnew <CR>" },
+        { "-", "<Cmd>Explore <CR>" },
+        { "<C-t>", "<Cmd>tabnew <CR>" },
         { "j", "gj" },
         { "k", "gk" },
-        { "<leader>",
-          { "f",
-            {
-              { "f", "<cmd>Telescope git_files<CR>" },
-              { "F", "<cmd>Telescope find_files<CR>" },
-              { "g", "<cmd>Telescope live_grep<CR>" },
-              { "b", "<cmd>Telescope buffers<CR>" },
-              { "h", "<cmd>Telescope help_tags<CR>" },
-              { ":", "<cmd>Telescope commands<CR>" },
-              { "y", "<cmd>Telescope command_history<CR>" },
-            },
-          },
-          {
-            "g",
+        { "<leader>", {
+          { "f", {
+            { "f", "<Cmd>Telescope git_files<CR>" },
+            { "F", "<Cmd>Telescope find_files<CR>" },
+            { "g", "<Cmd>Telescope live_grep<CR>" },
+            { "b", "<Cmd>Telescope buffers<CR>" },
+            { "h", "<Cmd>Telescope help_tags<CR>" },
+            { ":", "<Cmd>Telescope commands<CR>" },
+            { "y", "<Cmd>Telescope command_history<CR>" },
+          }},
+          { "g", {
             { "d", "<Plug>(coc-definition)" },
             { "i", "<Plug>(coc-implementation)" },
-          },
-          { "c",
-            {
-              { "c", "<cmd>Telescope coc commands" },
-              { "r", "<cmd>Telescope coc references<CR>" },
-              { "a", "<cmd>Telescope coc code_actions<CR>" },
-              { "d", "<cmd>Telescope coc diagnostics<CR>" },
-              { "s", "<cmd>Telescope coc symbols<CR>" },
-              { "S", "<cmd>Telescope coc workspace_symbols<CR>" },
-              { "t", "<cmd>Telescope coc type_definitions<CR>" },
-              { "i", "<cmd>Telescope coc implementations<CR>" },
-              { "p", "<cmd>Telescope coc list<CR>" },
-            }
-          },
-          { "m", "<cmd>CocCommand prettier.formatFile<CR>" },
-        },
-        { mode = "v",
-          {
-            "m", "<Plug>(coc-format-selected)"
+          }},
+          { "c", {
+              { "c", "<Cmd>Telescope coc commands<CR>" },
+              { "r", "<Cmd>Telescope coc references<CR>" },
+              { "a", "<Cmd>Telescope coc code_actions<CR>" },
+              { "d", "<Cmd>Telescope coc diagnostics<CR>" },
+              { "s", "<Cmd>Telescope coc symbols<CR>" },
+              { "S", "<Cmd>Telescope coc workspace_symbols<CR>" },
+              { "t", "<Cmd>Telescope coc type_definitions<CR>" },
+              { "i", "<Cmd>Telescope coc implementations<CR>" },
+              { "p", "<Cmd>Telescope coc list<CR>" },
+          }},
+          { "m", "<Cmd>CocCommand prettier.formatFile<CR>" }
           },
         },
+        { mode = "v", {
+          { "m", "<Plug>(coc-format-selected)" }
+        }},
       })
     end,
   },
