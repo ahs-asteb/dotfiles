@@ -247,7 +247,8 @@ require("lazy").setup({
               { "i", "<Cmd>Telescope coc implementations<CR>" },
               { "p", "<Cmd>Telescope coc list<CR>" },
           }},
-          { "m", "<Cmd>CocCommand prettier.formatFile<CR>" }
+          { "m", "<Cmd>CocCommand prettier.formatFile<CR>" },
+          { "h", function() vim.o.hlsearch = not vim.o.hlsearch end }
           },
         },
         { mode = "v", {
