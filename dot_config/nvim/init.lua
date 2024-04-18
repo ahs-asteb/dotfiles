@@ -129,7 +129,7 @@ require("lazy").setup({
           },
           file_ignore_patterns = {
             "node_modules",
-            "*pyz",
+            "**/*.pyz",
           },
         },
         extensions = {
@@ -140,7 +140,7 @@ require("lazy").setup({
             case_mode = "smart_case",
           },
           coc = {
-            theme = "dropdown",
+            theme = "ivy",
             prefer_locations = true,
           },
         },
@@ -224,7 +224,7 @@ require("lazy").setup({
         { "k", "gk" },
         { "<leader>", {
           { "f", {
-            { "f", "<Cmd>Telescope git_files<CR>" },
+            { "f", "<Cmd>Telescope git_files find_command=rg,--ignore,--hidden,--files,--glob='!**/*.pyz'<CR>" },
             { "F", "<Cmd>Telescope find_files<CR>" },
             { "g", "<Cmd>Telescope live_grep<CR>" },
             { "b", "<Cmd>Telescope buffers<CR>" },
