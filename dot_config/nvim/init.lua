@@ -67,11 +67,11 @@ require("lazy").setup({
         on_attach = function(bufnr)
           require('nest').applyKeymaps({
             { buffer = bufnr,
-              { mode = "ox",
+              { mode = "ox", {
                 { "ih", ":<C-U>Gitsigns select_hunk<CR>" },
                 { "ah", ":<C-U>Gitsigns select_hunk<CR>" },
-              },
-              { options = { expr = true },
+              }},
+              { options = { expr = true }, {
                 { "[c",
                   function()
                     if vim.wo.diff then return '[c' end
@@ -86,12 +86,12 @@ require("lazy").setup({
                     return '<Ignore>'
                   end
                 },
-              },
-              { "<leader>",
+              }},
+              { "<leader>", {
                 { "hs", gs.stage_hunk },
                 { "hr", gs.reset_hunk },
                 { "hu", gs.undo_stage_hunk },
-              },
+              }},
             }
           })
         end
