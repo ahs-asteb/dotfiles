@@ -131,6 +131,9 @@ require("lazy").setup({
             "node_modules",
             "**/*.pyz",
           },
+          preview = {
+            filesize_limit = 0.1, -- MB
+          },
         },
         extensions = {
           fzf = {
@@ -176,6 +179,7 @@ require("lazy").setup({
           "swift",
           "typescript",
           "vim",
+          "vimdoc",
           "yaml",
         },
         indent = {
