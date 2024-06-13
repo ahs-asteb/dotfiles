@@ -220,12 +220,24 @@ require("lazy").setup({
   {
     "lionc/nest.nvim",
     cond = not vim.g.vscode,
+    dependencies = {
+      "neoclide/coc.nvim",
+    },
     config = function()
       require("nest").applyKeymaps({
         { "-", "<Cmd>Explore <CR>" },
         { "<C-t>", "<Cmd>tabnew <CR>" },
         { "j", "gj" },
         { "k", "gk" },
+        { "K",
+          function()
+            if vim.fn.CocAction("hasProvider", "hover") then
+              vim.fn.CocActionAsync("doHover")
+            else
+              vim.fn.feedkeys('K', 'n')
+            end
+          end
+        },
         { "<leader>", {
           { "f", {
             { "f", "<Cmd>Telescope git_files find_command=rg,--ignore,--hidden,--files,--glob='!**/*.pyz'<CR>" },
