@@ -246,8 +246,9 @@ require("lazy").setup({
             { "g", "<Cmd>Telescope live_grep<CR>" },
             { "b", "<Cmd>Telescope buffers<CR>" },
             { "h", "<Cmd>Telescope help_tags<CR>" },
-            { ":", "<Cmd>Telescope commands<CR>" },
             { "y", "<Cmd>Telescope command_history<CR>" },
+            { ":", "<Cmd>Telescope commands<CR>" },
+            { "-", "<Cmd>Telescope oldfiles<CR>" },
           }},
           { "g", {
             { "d", "<Plug>(coc-definition)" },
