@@ -165,6 +165,7 @@ require("lazy").setup({
   "tpope/vim-repeat",
   "tpope/vim-surround",
   "tpope/vim-tbone",
+  "tpope/vim-unimpaired",
   "wellle/targets.vim",
   {
     "nvim-treesitter/nvim-treesitter",
@@ -267,6 +268,8 @@ require("lazy").setup({
           { "h", function() vim.o.hlsearch = not vim.o.hlsearch end }
           },
         },
+        { "[g", "<Plug>(coc-diagnostic-prev)" },
+        { "]g", "<Plug>(coc-diagnostic-next)" },
         { mode = "v", {
           { "m", "<Plug>(coc-format-selected)" }
         }},
