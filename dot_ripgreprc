@@ -1,0 +1,4 @@
+--files
+--smart-case
+--type-add 'react:*.{js,jsx,ts,tsx}'
+--type-add 'web:*.{html,css,js,jsx,ts,tsx}'
