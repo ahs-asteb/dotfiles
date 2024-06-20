@@ -26,6 +26,7 @@ vim.opt.colorcolumn = "80"
 vim.opt.cursorline = true
 vim.opt.expandtab = true
 vim.opt.expandtab = true
+vim.opt.grepprg = "rg --vimgrep"
 vim.opt.ignorecase = true
 vim.opt.number = true
 vim.opt.scrolloff = 8
