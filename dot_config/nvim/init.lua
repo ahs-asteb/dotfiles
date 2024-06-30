@@ -190,7 +190,7 @@ require("lazy").setup({
         },
         highlight = {
           enable = true,
-          disable = { "jsx", "tsx" },
+          disable = { "jsx", "tsx", "help", "vimdoc" },
         },
         textobjects = {
           select = {
@@ -267,7 +267,8 @@ require("lazy").setup({
               { "p", "<Cmd>Telescope coc list<CR>" },
           }},
           { "m", "<Cmd>CocCommand prettier.formatFile<CR>" },
-          { "h", function() vim.o.hlsearch = not vim.o.hlsearch end }
+          { "h", function() vim.o.hlsearch = not vim.o.hlsearch end },
+          { "t", function() vim.b.copilot_enabled = not vim.b.copilot_enabled end }
           },
         },
         { "[g", "<Plug>(coc-diagnostic-prev)" },
