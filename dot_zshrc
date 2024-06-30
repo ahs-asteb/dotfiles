@@ -3,6 +3,7 @@ alias gti=git
 alias grit='git --no-pager'
 
 export EDITOR="nvim"
+export SESSIONS="$HOME/ephemera/sessions"
 
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
@@ -43,3 +44,8 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export FZF_DEFAULT_COMMAND="rg --hidden --follow --glob '!.git/*'"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+() {
+  local FZF_ZSH="$HOME/scripts/fzf-git.sh/fzf-git.sh"
+  [[ -f $FZF_ZSH ]] && source $FZF_ZSH
+}
