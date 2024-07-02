@@ -13,6 +13,12 @@ export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PR
 # ~/.local/bin
 export PATH="$HOME/.local/bin:$PATH"
 
+# luarocks local executables
+export PATH="$HOME/.luarocks/bin:$PATH"
+
+# openresty
+export PATH="/usr/local/openresty/nginx/sbin:$PATH"
+
 alias colors='for i in {0..16};do printf "\e[38;5;${i}mcolour${i}\n";done'
 function colours-to() {
   IN_INDEX=${@:1}
