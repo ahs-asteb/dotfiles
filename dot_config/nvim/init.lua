@@ -26,6 +26,7 @@ vim.opt.colorcolumn = "80"
 vim.opt.cursorline = true
 vim.opt.expandtab = true
 vim.opt.expandtab = true
+vim.opt.grepprg = "rg --vimgrep"
 vim.opt.ignorecase = true
 vim.opt.number = true
 vim.opt.scrolloff = 8
@@ -68,11 +69,11 @@ require("lazy").setup({
         on_attach = function(bufnr)
           require('nest').applyKeymaps({
             { buffer = bufnr,
-              { mode = "ox",
+              { mode = "ox", {
                 { "ih", ":<C-U>Gitsigns select_hunk<CR>" },
                 { "ah", ":<C-U>Gitsigns select_hunk<CR>" },
-              },
-              { options = { expr = true },
+              }},
+              { options = { expr = true }, {
                 { "[c",
                   function()
                     if vim.wo.diff then return '[c' end
@@ -87,12 +88,12 @@ require("lazy").setup({
                     return '<Ignore>'
                   end
                 },
-              },
-              { "<leader>",
+              }},
+              { "<leader>", {
                 { "hs", gs.stage_hunk },
                 { "hr", gs.reset_hunk },
                 { "hu", gs.undo_stage_hunk },
-              },
+              }},
             }
           })
         end
@@ -132,6 +133,9 @@ require("lazy").setup({
             "node_modules",
             "**/*.pyz",
           },
+          preview = {
+            filesize_limit = 0.1, -- MB
+          },
         },
         extensions = {
           fzf = {
@@ -163,6 +167,7 @@ require("lazy").setup({
   "tpope/vim-repeat",
   "tpope/vim-surround",
   "tpope/vim-tbone",
+  "tpope/vim-unimpaired",
   "wellle/targets.vim",
   {
     "nvim-treesitter/nvim-treesitter",
@@ -177,6 +182,7 @@ require("lazy").setup({
           "swift",
           "typescript",
           "vim",
+          "vimdoc",
           "yaml",
         },
         indent = {
@@ -185,7 +191,7 @@ require("lazy").setup({
         },
         highlight = {
           enable = true,
-          disable = { "jsx", "tsx" },
+          disable = { "jsx", "tsx", "help", "vimdoc" },
         },
         textobjects = {
           select = {
@@ -217,12 +223,24 @@ require("lazy").setup({
   {
     "lionc/nest.nvim",
     cond = not vim.g.vscode,
+    dependencies = {
+      "neoclide/coc.nvim",
+    },
     config = function()
       require("nest").applyKeymaps({
         { "-", "<Cmd>Explore <CR>" },
         { "<C-t>", "<Cmd>tabnew <CR>" },
         { "j", "gj" },
         { "k", "gk" },
+        { "K",
+          function()
+            if vim.fn.CocAction("hasProvider", "hover") then
+              vim.fn.CocActionAsync("doHover")
+            else
+              vim.fn.feedkeys('K', 'n')
+            end
+          end
+        },
         { "<leader>", {
           { "f", {
             { "f", "<Cmd>Telescope git_files find_command=rg,--ignore,--hidden,--files,--glob='!**/*.pyz'<CR>" },
@@ -230,8 +248,9 @@ require("lazy").setup({
             { "g", "<Cmd>Telescope live_grep<CR>" },
             { "b", "<Cmd>Telescope buffers<CR>" },
             { "h", "<Cmd>Telescope help_tags<CR>" },
-            { ":", "<Cmd>Telescope commands<CR>" },
             { "y", "<Cmd>Telescope command_history<CR>" },
+            { ":", "<Cmd>Telescope commands<CR>" },
+            { "-", "<Cmd>Telescope oldfiles<CR>" },
           }},
           { "g", {
             { "d", "<Plug>(coc-definition)" },
@@ -249,9 +268,12 @@ require("lazy").setup({
               { "p", "<Cmd>Telescope coc list<CR>" },
           }},
           { "m", "<Cmd>CocCommand prettier.formatFile<CR>" },
-          { "h", function() vim.o.hlsearch = not vim.o.hlsearch end }
+          { "h", function() vim.o.hlsearch = not vim.o.hlsearch end },
+          { "t", function() vim.b.copilot_enabled = not vim.b.copilot_enabled end }
           },
         },
+        { "[g", "<Plug>(coc-diagnostic-prev)" },
+        { "]g", "<Plug>(coc-diagnostic-next)" },
         { mode = "v", {
           { "m", "<Plug>(coc-format-selected)" }
         }},
