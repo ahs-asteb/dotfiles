@@ -54,6 +54,7 @@ require("lazy").setup({
     end,
   },
   -- others
+  "chr4/nginx.vim",
   {
     "github/copilot.vim",
     cond = not vim.g.vscode,
