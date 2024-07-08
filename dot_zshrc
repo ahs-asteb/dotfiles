@@ -39,6 +39,7 @@ function colours-to() {
   return;
 }
 alias italics='echo -e "\e[3mItalics?\e[23m"'
+alias latest='figlet -f univers -c "latest $(date +%H:%M)"'
 
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
