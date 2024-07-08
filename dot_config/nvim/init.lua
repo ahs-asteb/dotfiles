@@ -273,6 +273,8 @@ require("lazy").setup({
         },
         { "[g", "<Plug>(coc-diagnostic-prev)" },
         { "]g", "<Plug>(coc-diagnostic-next)" },
+        { "<F5>", "<Plug>(coc-diagnostic-prev)" },
+        { "<F6>", "<Plug>(coc-diagnostic-next)" },
         { mode = "v", {
           { "m", "<Plug>(coc-format-selected)" }
         }},
