@@ -178,6 +178,7 @@ require("lazy").setup({
         ensure_installed = {
           "javascript",
           "lua",
+          "nginx",
           "python",
           "swift",
           "typescript",
