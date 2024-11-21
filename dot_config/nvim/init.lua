@@ -168,6 +168,7 @@ require("lazy").setup({
   "tpope/vim-surround",
   "tpope/vim-tbone",
   "tpope/vim-unimpaired",
+  "tpope/vim-vinegar",
   "wellle/targets.vim",
   {
     "nvim-treesitter/nvim-treesitter",
