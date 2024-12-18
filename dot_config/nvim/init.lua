@@ -55,6 +55,7 @@ require("lazy").setup({
   },
   -- others
   "chr4/nginx.vim",
+  "clojure-vim/vim-jack-in",
   {
     "github/copilot.vim",
     cond = not vim.g.vscode,
@@ -154,8 +155,11 @@ require("lazy").setup({
       require("telescope").load_extension("coc")
     end,
   },
+  { "olical/conjure", ft = { "clojure", "fennel" }, lazy = true },
+  "radenling/vim-dispatch-neovim",
   "tpope/vim-abolish",
   "tpope/vim-commentary",
+  "tpope/vim-dispatch",
   "tpope/vim-endwise",
   {
     "tpope/vim-fugitive",
@@ -176,6 +180,7 @@ require("lazy").setup({
     config = function()
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
+          "clojure",
           "javascript",
           "lua",
           "nginx",
